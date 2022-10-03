@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const shouldCompress = require("../util/shouldCompress");
 const compress = require("../util/compress");
 
-const DEFAULT_QUALITY = 40;
+const DEFAULT_QUALITY = 10;
 
 exports.handler = async (event, context) => {
     let { url } = event.queryStringParameters;
@@ -27,7 +27,7 @@ exports.handler = async (event, context) => {
     // by now, url is a string
     url = url.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, "http://");
 
-    const webp = !jpeg;
+    const avif = !jpeg;
     const grayscale = bw != 0;
     const quality = parseInt(l, 10) || DEFAULT_QUALITY;
 
@@ -56,8 +56,8 @@ exports.handler = async (event, context) => {
 
         const originSize = data.length;
 
-        if (shouldCompress(originType, originSize, webp)) {
-            const { err, output, headers } = await compress(data, webp, grayscale, quality, originSize);   // compress
+        if (shouldCompress(originType, originSize, avif)) {
+            const { err, output, headers } = await compress(data, avif, grayscale, quality, originSize);   // compress
 
             if (err) {
                 console.log("Conversion failed: ", url);
