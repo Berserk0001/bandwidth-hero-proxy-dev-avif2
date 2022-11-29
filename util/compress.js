@@ -3,6 +3,9 @@ const sharp = require("sharp");
 function compress(input, avif, grayscale, quality, originSize) {
 	const format = avif ? "avif" : "jpeg";
 
+const compressionQuality = quality * 0.1;
+quality = Math.ceil(compressionQuality);
+
 	return sharp(input)
 		.grayscale(grayscale)
 		.toFormat(format, {
