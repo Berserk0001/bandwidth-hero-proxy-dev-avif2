@@ -7,9 +7,9 @@ function compress(input, avif, grayscale, quality, originSize) {
 		.grayscale(grayscale)
 		.toFormat(format, {
 			quality: quality,
-			effort: 0,
-			mozjpeg: true,
-			progressive: true
+			effort: 2
+			// mozjpeg: true
+			// progressive: true
 		})
 		.toBuffer({resolveWithObject: true})
 		.then(({data: output,info}) => {	// this way we can also get the info about output image, like height, width
