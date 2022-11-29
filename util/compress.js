@@ -10,7 +10,7 @@ quality = Math.ceil(compressionQuality);
 		.grayscale(grayscale)
 		.toFormat(format, {
 			quality: quality,
-			effort: 2
+			effort: 0
 			// mozjpeg: true
 			// progressive: true
 		})
