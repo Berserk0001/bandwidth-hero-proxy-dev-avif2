@@ -1,5 +1,5 @@
-const MIN_COMPRESS_LENGTH = 2024; // ~2kb
-const MIN_TRANSPARENT_COMPRESS_LENGTH = MIN_COMPRESS_LENGTH * 1; // ~2kb
+const MIN_COMPRESS_LENGTH = 2024; // ~2Kb
+const MIN_TRANSPARENT_COMPRESS_LENGTH = MIN_COMPRESS_LENGTH * 20; // ~40Kb
 
 function shouldCompress(originType, originSize, avif) {
 	if (!originType.startsWith("image")) return false;
