@@ -5,9 +5,9 @@ function shouldCompress(originType, originSize, avif) {
 	if (!originType.startsWith("image")) return false;
         if (originSize === 0) return false;
 	if (avif && originSize < MIN_COMPRESS_LENGTH) return false;
-	if (	// if webp, jpg, png or gif image, and size is less than compression limit (also shouldn't be avif)
+	if (	// if png or gif image, and size is less than compression limit (also shouldn't be avif)
 		!avif &&
-		(originType.endsWith("png") || originType.endsWith("gif") || originType.endsWith("webp") || originType.endsWith("jpg") || originType.endsWith("jpeg")) &&
+		(originType.endsWith("png") || originType.endsWith("gif")) &&
 		originSize < MIN_TRANSPARENT_COMPRESS_LENGTH
 	) {
 		return false;
