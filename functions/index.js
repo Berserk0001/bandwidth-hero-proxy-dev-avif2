@@ -7,7 +7,7 @@ const DEFAULT_QUALITY = 10;
 
 exports.handler = async (event, context) => {
     let { url } = event.queryStringParameters;
-    const { jpeg, bw, l } = event.queryStringParameters;
+    let { jpeg, bw, l } = event.queryStringParameters;
 
     if (!url) {
         return {
@@ -27,9 +27,9 @@ exports.handler = async (event, context) => {
     // by now, url is a string
     url = url.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, "http://");
 
-    const avif = !jpeg;
-    const grayscale = bw != 0;
-    const quality = parseInt(l, 10) || DEFAULT_QUALITY;
+    let avif = !jpeg;
+    let grayscale = bw != 0;
+    let quality = parseInt(l, 10) || DEFAULT_QUALITY;
 
     try {
         let response_headers = {};
@@ -57,7 +57,7 @@ exports.handler = async (event, context) => {
         let originSize = data.length;
 
         if (shouldCompress(originType, originSize, avif)) {
-            const { err, output, headers } = await compress(data, avif, grayscale, quality, originSize);   // compress
+            let { err, output, headers } = await compress(data, avif, grayscale, quality, originSize);   // compress
 
             if (err) {
                 console.log("Conversion failed: ", url);
