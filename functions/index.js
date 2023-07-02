@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const shouldCompress = require("../util/shouldCompress");
 const compress = require("../util/compress");
 
-const DEFAULT_QUALITY = 10;
+const DEFAULT_QUALITY = 5;
 
 exports.handler = async (event, context) => {
     let { url } = event.queryStringParameters;
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
 
     let avif = !jpeg;
     let grayscale = bw != 0;
-    let quality = parseInt(l, 10) || DEFAULT_QUALITY;
+    let quality = parseInt(l, 5) || DEFAULT_QUALITY;
 
     try {
         let response_headers = {};
