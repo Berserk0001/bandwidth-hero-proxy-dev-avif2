@@ -27,7 +27,7 @@ exports.handler = async (event, context) => {
     // by now, url is a string
     url = url.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, "http://");
 
-    let avif = !jpeg;
+    let webp = !jpeg;
     let grayscale = bw != 0;
     let quality = parseInt(l, 10) || DEFAULT_QUALITY;
 
