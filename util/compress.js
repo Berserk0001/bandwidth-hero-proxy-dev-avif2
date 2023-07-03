@@ -2,7 +2,7 @@ const sharp = require("sharp");
 
 function compress(input, avif, grayscale, quality, originSize) {
 	const format = avif ? "avif" : "jpeg";
-        let compressionQuality = quality * 0.6;
+        let compressionQuality = quality * 0.9;
 
         quality = Math.ceil(compressionQuality);
 
@@ -10,7 +10,7 @@ function compress(input, avif, grayscale, quality, originSize) {
 		.grayscale(grayscale)
 		.toFormat(format, {
 			quality: quality,
-                        effort: 2
+                        effort: 0
 		})
 		.toBuffer({resolveWithObject: true})
 		.then(({data: output,info}) => {	// this way we can also get the info about output image, like height, width
