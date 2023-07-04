@@ -7,7 +7,7 @@ const DEFAULT_QUALITY = 10;
 
 exports.handler = async (event, context) => {
     let { url } = event.queryStringParameters;
-    let { jpeg, bw, l } = event.queryStringParameters;
+    let { jpg, bw, l } = event.queryStringParameters;
 
     if (!url) {
         return {
