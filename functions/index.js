@@ -7,7 +7,7 @@ const DEFAULT_QUALITY = 10;
 
 exports.handler = async (event, context) => {
     let { url } = event.queryStringParameters;
-    let { jpeg, bw, l } = event.queryStringParameters;
+    let { jpeg, bw, l } = event.queryStringParameters;  //use const by default
 
     if (!url) {
         return {
@@ -27,13 +27,13 @@ exports.handler = async (event, context) => {
     // by now, url is a string
     url = url.replace(/http:\/\/1\.1\.\d\.\d\/bmi\/(https?:\/\/)?/i, "http://");
 
-    let avif = !jpeg;
-    let grayscale = bw != 0;
-    let quality = parseInt(l, 10) || DEFAULT_QUALITY;
+    let avif = !jpeg;  //use const by default
+    let grayscale = bw != 0;  //use const by default
+    let quality = parseInt(l, 10) || DEFAULT_QUALITY;  //use const by default
 
     try {
         let response_headers = {};
-        let { data, type: originType } = await fetch(url, {
+        let { data, type: originType } = await fetch(url, {  //use const by default
             headers: {
                 ...pick(event.headers, ['cookie', 'dnt', 'referer']),
                 'user-agent': 'Bandwidth-Hero Compressor',
@@ -54,10 +54,10 @@ exports.handler = async (event, context) => {
             }
         })
 
-        let originSize = data.length;
+        let originSize = data.length;  //use const by default
 
         if (shouldCompress(originType, originSize, avif)) {
-            let { err, output, headers } = await compress(data, avif, grayscale, quality, originSize);   // compress
+            let { err, output, headers } = await compress(data, avif, grayscale, quality, originSize);   // compress, use const by default
 
             if (err) {
                 console.log("Conversion failed: ", url);
@@ -65,7 +65,7 @@ exports.handler = async (event, context) => {
             }
 
             // console.log(`From ${originSize}, Saved: ${(originSize - output.length)/originSize}%`);
-            console.log(`From: ${originSize}, To: ${output.length}, Saved: ${(originSize - output.length)}`);
+	    console.log(`From: ${originSize}, To: ${output.length}, Saved: ${(originSize - output.length)}`); // easier to read
             const encoded_output = output.toString('base64');
             return {
                 statusCode: 200,
@@ -98,4 +98,4 @@ exports.handler = async (event, context) => {
             body: err.message || ""
         }
     }
-                    }
+}
