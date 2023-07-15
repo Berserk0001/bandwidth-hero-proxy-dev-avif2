@@ -12,25 +12,17 @@ function compress(input, avif, grayscale, quality, originSize) {
 			quality: quality,
 			effort: 1
 		})
-		.toBuffer({resolveWithObject: true})
-		.then(({data: output,info}) => {	// this way we can also get the info about output image, like height, width
-		// .toBuffer()
-		// .then( output => {
-			return {
-				err: null,
-				headers: {
-					"content-type": `image/${format}`,
-					"content-length": info.size,
-					"x-original-size": originSize,
-					"x-bytes-saved": originSize - info.size,
-				},
-				output: output
-			};
-		}).catch(err => {
-			return {
-				err: err
-			};
-		});
+		.toBuffer((err, output, info) => {
+      if (err || !info || res.headersSent) {
+        return redirect(req, res);
+      }
+
+      res.setHeader('content-type', `image/${format}`);
+      res.setHeader('content-length', info.size);
+      res.setHeader('x-original-size', req.params.originSize);
+      res.setHeader('x-bytes-saved', req.params.originSize - info.size);
+      res.status(200).send(output);
+    });
 }
 
 module.exports = compress;
