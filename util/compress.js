@@ -9,7 +9,8 @@ function compress(input, avif, grayscale, quality, originSize) {
 	return sharp(input)
 		.grayscale(grayscale)
 		.toFormat(format, {
-			quality: quality
+			quality: quality,
+			effort: 1
 		})
 		.toBuffer({resolveWithObject: true})
 		.then(({data: output,info}) => {	// this way we can also get the info about output image, like height, width
