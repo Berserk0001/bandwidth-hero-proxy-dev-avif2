@@ -1,7 +1,7 @@
-const pick = require("../util/pick");
+const pick = require("../util/pick.js");
 const fetch = require("node-fetch");
-const shouldCompress = require("../util/shouldCompress");
-const compress = require("../util/compress");
+const shouldCompress = require("../util/shouldCompress.js");
+const compress = require("../util/compress.js");
 
 const DEFAULT_QUALITY = 10;
 
