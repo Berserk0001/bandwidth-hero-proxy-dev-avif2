@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 const app = require('express')()
-const index = require('./index')
+const index = require('./util/index')
 
 const PORT = process.env.PORT || 8080
 
