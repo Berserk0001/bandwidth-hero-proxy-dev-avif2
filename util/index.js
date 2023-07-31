@@ -1,7 +1,7 @@
-const params = require("../src/params");
+const pick = require("../util/pick");
 const fetch = require("node-fetch");
-const shouldCompress = require("../src/shouldCompress");
-const compress = require("../src/compress");
+const shouldCompress = require("../util/shouldCompress");
+const compress = require("../util/compress");
 
 const DEFAULT_QUALITY = 10;
 
@@ -35,7 +35,7 @@ exports.handler = async (event, context) => {
         let response_headers = {};
         let { data, type: originType } = await fetch(url, {  //use const by default
             headers: {
-                ...params(event.headers, ['cookie', 'dnt', 'referer']),
+                ...pick(event.headers, ['cookie', 'dnt', 'referer']),
                 'user-agent': 'Bandwidth-Hero Compressor',
                 'x-forwarded-for': event.headers['x-forwarded-for'] || event.ip,
                 via: '1.1 bandwidth-hero'
